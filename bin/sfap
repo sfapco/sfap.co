@@ -1,0 +1,51 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies
+ */
+
+var sfap = require('../')
+  , program = require('commander')
+  , merge = require('merge')
+  , http = require('http')
+  , pkg = require('../package')
+  , config = require('../app/config')
+  , commands = {}
+
+program
+	.version(pkg.version)
+
+commands.server = program.command('server')
+	.description("start the sfap web serve")
+	.option('-p, --port [port]', "port to listen on")
+	.action(function () {
+		var port, app, server
+
+		// port can derive from command line
+		// or fall back to `config.server.port` and
+		// if that isn't set then it will fall back to
+		// `sfap.DEFAULT_SERVER_PORT`
+		port = commands.server.port || config.server.port
+
+
+		var app = sfap(merge(config, {
+			server: {
+				port: port
+			}
+		}));
+
+		// bootstrap routes
+		require('../app/routes')(app);
+		http.createServer(app).listen(app.config.server.port);
+	});
+
+
+
+
+// parse argument variables
+program.parse(process.argv);
+
+// show usage if arguments were not provided
+if (3 > process.argv.length) {
+	program.help();
+}

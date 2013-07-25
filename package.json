@@ -1,0 +1,26 @@
+{
+  "name": "sfap.co",
+  "version": "0.0.1",
+  "description": "code for sfap.co",
+  "main": "index.js",
+  "preferGlobal": true,
+  "bin": {
+    "sfap": "./bin/sfap"
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "make test"
+  },
+  "author": "sfap inc",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "~2.0.0",
+    "connect": "~2.8.4",
+    "troute": "0.0.5",
+    "debug": "~0.7.2",
+    "send": "~0.1.3",
+    "merge": "~1.1.1"
+  }
+}
