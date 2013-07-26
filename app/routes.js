@@ -6,6 +6,7 @@
 var sfap = require('../')
 
 
+
 /**
  * maps route to an initialized `app`
  */
@@ -15,46 +16,66 @@ module.exports = function routes (app, config) {
 	// ensure object for the `config` argument
 	config = ('object' === typeof config)? config : {};
 
-
-	/**
-	 * Home page route
-	 */
-
-	app.get('[/home|/index|/]+[\.html]?', function (req, res) {
-		var file = '/index.html'
-		  , stream = sfap.send(req, file)
-				.root(sfap.dir(config.publicDirectory || 'public'))
-				.maxage(config.maxage || 0)
-				.index(config.indexFile || 'index.html')
-
-		console.log(file)
-
-
-		stream.on('error', function (err) {
-			sfap.debug('home route: error: %s', err.toString());
-			res.writeHead(err.status, {
-				'Content-Type': 'text/plain'
+	app.use(function (req, res, next) {
+		
+		res.json = function (code, data) {
+			code = ('number' === typeof code)? code : 200;
+			data = ('object' === typeof code)? code : data;
+			res.writeHead(code, {
+				'Content-Type': 'application/json'
 			});
 
-			switch (err.code) {
-				case 'ENOENT':
-					res.end("oops, file not found dude");
-					break;
+			res.end(JSON.stringify(data));
+		};
 
-				default:
-					res.end("ugh, something went wrong!")
-			}
-		});
-
-		// never expose directories
-		stream.on('directory', function () {
-			// `403` for forbidden
-			res.writeHead(403, {'Content-Type': 'text/plain'});
-			res.end("sorry, this is forbidden");
-		});
+		next();
+	});
 
 
-		// pipe stream back to `res` stream
-		stream.pipe(res);
+	/**
+	 * module route
+	 */
+
+	app.get('/module/:path', function (req, res) {
+		var view = '/module/'+ req.params.path +'.js'
+		if (sfap.isLocalFile(view)) {
+			sfap.streamFile(view, config, req, res)
+				.type('application/js');
+		} else {
+			res.json(404, '');
+		}
+	});
+
+
+	/**
+	 * view route
+	 */
+
+	app.get('/view/:path', function (req, res) {
+		var view = '/view/'+ req.params.path +'.dot'
+		if (sfap.isLocalFile(view)) {
+			sfap.streamFile(view, config, req, res)
+				.type('text/html');
+		} else {
+			res.json(404, {
+				status: false,
+				error: "View not found"
+			})
+		}
+	});
+
+
+	/**
+	 * catch all page route
+	 */
+
+	app.get('^[/]?:root?[/]+(.*)?', function (req, res) {
+		var file = sfap.parseUrl(req).pathname
+
+		if (!sfap.isLocalFile(file)) {
+			file = '/index.html';
+		}
+		
+		return sfap.streamFile(file, config, req, res);
 	});
 };

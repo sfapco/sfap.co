@@ -1,0 +1,3 @@
+[submodule "public/js/sfap"]
+	path = public/js/sfap
+	url = git@github.com:sfapco/sfap.js.git
