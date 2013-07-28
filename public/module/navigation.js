@@ -21,7 +21,7 @@ function Navigation (opts) {
 	app.ui.TopcoatElement.call(this);
 	this.ui = app.ui.NavigationBar();
 	this.el = domify(
-		'<header></header>'
+		'<header class="navigation"></header>'
 	);
 
 	this.el.setAttribute('id', opts.id || 'nav-'+ Math.random().toString('16').slice(1));

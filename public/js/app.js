@@ -22,12 +22,16 @@ app.ready(function () {
 		navigation();
 	});
 
-
-	app.use(function (req) {
-		fourOhFour();
+	app.match('/user/:id/:subid/:id3/:otherid', function (req) {
+		console.log(arguments)
 	});
 
-	
+
+	app.use(function (req) {
+		fourOhFour(req);
+	});
+
+
 }).ready(function () {
 	app.init(app.location.href);
 });
@@ -47,7 +51,7 @@ function navigation () {
 			root: rootNode
 		});
 
-		nav.ui.title("Summit For A Purpose")
+		nav.ui.title("SFAP")
 			.align('left')
 
 		nav.ui
@@ -62,7 +66,7 @@ function navigation () {
  * Shows a 404 page
  */
 
-function fourOhFour () {
+function fourOhFour (req) {
 	app.view('404', {url: req.url}, function (err, view) {
 		console.log(view)
 	});

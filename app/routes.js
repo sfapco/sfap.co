@@ -65,6 +65,14 @@ module.exports = function routes (app, config) {
 	});
 
 
+	app.get('/api/:path', function (req, res) {
+		app.api.get(req.params.path, function (err, req, data) {
+			if (err) throw err;
+			res.json(200, JSON.parse(data));
+		});
+	});
+
+
 	/**
 	 * catch all page route
 	 */
