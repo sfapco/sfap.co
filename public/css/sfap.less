@@ -1,0 +1,190 @@
+@import url(http://fonts.googleapis.com/css?family=Codystar|Expletus+Sans);
+
+.clearfix:after { content: "\00A0"; display: block; clear: both; visibility: hidden; line-height: 0; height: 0;}
+.clearfix{ display: inline-block;}
+html[xmlns] .clearfix { display: block;}
+* html .clearfix{ height: 1%;}
+.clearfix {display: block}
+
+html, body {
+	height: 100%;
+
+	.progress-graphic-overlay {
+		position: absolute;
+		height: 2000px;
+		width: 100%;
+		background: rgba(255, 255, 255, 0.8);
+		display: block;
+		top: 0;
+		left: 0;
+		z-index: 9999;
+
+		img {
+			position: absolute;
+			display: block;
+			width: 15px;
+		}
+
+		span {
+			font-family: Codystar;
+			position: absolute;
+			display: block;
+			margin-top: 10px;
+			margin-left: -40px;
+			font-size: 1.4em;
+		}
+	}
+}
+
+#sfap {
+	position: relative;
+	width: 100%;
+	min-width: 960px;
+	background-color: rgba(253, 252, 252, 0.1);
+	color: #666;
+	font-size: .75em;
+	font-family: Expletus Sans, Codystar,"Lucida Sans","Lucida Grande",sans-serif;
+	font-smooth: always;
+	-webkit-font-smoothing: subpixel-antialiased;
+
+	.navigation {
+		box-shadow: 0 0 7px 0 rgba(50,50,50, .30);
+		background-color: rgba(255, 255, 255, 0.5);
+		color: white;
+		position: fixed;
+		
+		top: 0;
+		z-index: 9999;
+		border-top: 1px solid #282828;
+		border-radius: 0 0 2px 2px;
+		font-size: 12px;
+		font-weight: 500;
+		height: 40px;
+		width: 100%;
+		padding: 0px 10%;
+	
+		.logo {
+			text-align: center;
+			border: 1px dashed #000;
+		}
+	}
+
+
+	.nav-links {
+		float: right;
+		position: relative;
+		width: auto;
+		border: none;
+
+		.nav-links-container {
+			border: none;
+			background-color: transparent;
+
+			h3 {
+				background: none;
+				display: none;
+			}
+
+			ul {
+				border: none;
+
+				li {
+					font-family: Codystar;
+
+					float: left;
+					position: relative;
+					padding: 0 0.5em;
+					text-shadow: rgba(0,0,0,.35) 0 0 8px;
+					letter-spacing: -1px;
+					border: none;
+
+					a {
+						text-decoration: none;
+						color: #000;
+						font-size: 1.6em;
+					}
+
+					a+a:before  {
+						border-right: 1px solid #000;
+						padding-right: 0.6em;
+					}
+				}
+			}
+		}
+	}
+
+
+	#main-container {
+		width: auto;
+		position: relative;
+		height: 100%;
+		display: block;
+		padding-top: 40px;
+
+		.page {
+			background-size: cover;
+			background-repeat: no-repeat;
+			height: 100%;
+			width: auto;
+			padding: 10%;
+			position: relative;
+			box-shadow: inset 0px 0px 25px 5px rgba(228, 228, 228, 0.31);
+			min-height: 800px;
+		}
+
+		.page-divider {
+			box-shadow: 0px 4px 7px 0px rgba(165, 171, 211, 0.83);
+			background-color: rgba(255, 255, 255, 0.3);
+			color: white;
+			position: relative;
+			border-top: 1px solid rgba(40, 40, 40, 0.5);
+			border-bottom: 1px solid rgba(165, 171, 211, 0.69);
+			border-radius: 0 0 2px 2px;
+			height: 40px;
+			width: auto;
+			padding: 0px 10%;
+			display: block;
+		}
+
+		#home {
+			background-image: url(/img/nyc-pan.png);
+
+			#main-logo {
+				position: relative;
+				padding-top: 18%;
+				display: block;
+				color: #fff;
+				font-size: 5em;
+				width: 250px;
+				text-align: center;
+				float: left;
+			}
+
+			#event-teaser {
+				float: right;
+				border: 1px dotted #fff;
+				border-radius: 2px;
+				position: relative;
+				width: 425px;
+				height: 500px;
+			}
+		}
+
+		#events {
+			
+		}
+	}
+
+	#main-footer {
+		background-color: rgba(0, 0, 0, 0.4);
+		bottom: 0pt;
+		color: white;
+		font-family: 'century gothic', 'heiti sc', sans-serif;
+		font-size: 12px;
+		height: 40px;
+		left: 0pt;
+		position: fixed;
+		width: 100%;
+		z-index: 9999;
+	}
+}
